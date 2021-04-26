@@ -7,6 +7,50 @@
     <title>merupu</title>
 </head>
 <body>
-    hi iam midhun. how are you thunder.
+    /*
+   Board: DOIT ESP32 DEVKIT V1
+*/
+#include <WiFi.h>
+#include <IFTTTWebhook.h>
+
+#define WIFISSID "B6-LAB702" // Your WiFi Name
+#define PASSWORD "" // Your WiFi Password
+
+#define IFTTT_API_KEY "VhzrcD2qI-EMIL9JXOvB0" 
+#define IFTTT_EVENT_NAME "wifi_rssi" 
+
+IFTTTWebhook ifttt_webhook(IFTTT_API_KEY, IFTTT_EVENT_NAME);
+
+void setup() {
+  // Initializing Serial communication.
+  Serial.begin(9600);
+  Serial.println("Init... T7_Signal_Log");
+  
+  // Setup up WiFi and Connecting to an active hotspot.
+  Serial.print("\n\nCnonnecting to ");
+  Serial.println(WIFISSID);
+
+  WiFi.begin(WIFISSID, PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) { // Waiting for successful connection
+        delay(500);
+        Serial.print(".");
+  }
+
+  Serial.print("\nRSSI: ");
+  Serial.println(WiFi.RSSI());
+  
+  Serial.print("WiFi connected. IP address: ");
+  Serial.println(WiFi.localIP());
+  
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  int rssi = WiFi.RSSI();
+  ifttt_webhook.trigger(String(rssi).c_str());
+  Serial.print("\nRSSI: ");
+  Serial.println(rssi);
+  delay(5000);
+}
 </body>
 </html>
