@@ -1,56 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>merupu</title>
+<meta charset="utf-8">
+<title>my_portfolio</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    /*
-   Board: DOIT ESP32 DEVKIT V1
-*/
-#include <WiFi.h>
-#include <IFTTTWebhook.h>
-
-#define WIFISSID "B6-LAB702" // Your WiFi Name
-#define PASSWORD "" // Your WiFi Password
-
-#define IFTTT_API_KEY "VhzrcD2qI-EMIL9JXOvB0" 
-#define IFTTT_EVENT_NAME "wifi_rssi" 
-
-IFTTTWebhook ifttt_webhook(IFTTT_API_KEY, IFTTT_EVENT_NAME);
-
-void setup() {
-  // Initializing Serial communication.
-  Serial.begin(9600);
-  Serial.println("Init... T7_Signal_Log");
-  
-  // Setup up WiFi and Connecting to an active hotspot.
-  Serial.print("\n\nCnonnecting to ");
-  Serial.println(WIFISSID);
-
-  WiFi.begin(WIFISSID, PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) { // Waiting for successful connection
-        delay(500);
-        Serial.print(".");
-  }
-
-  Serial.print("\nRSSI: ");
-  Serial.println(WiFi.RSSI());
-  
-  Serial.print("WiFi connected. IP address: ");
-  Serial.println(WiFi.localIP());
-  
-}
-
-// the loop function runs over and over again forever
-void loop() {
-  int rssi = WiFi.RSSI();
-  ifttt_webhook.trigger(String(rssi).c_str());
-  Serial.print("\nRSSI: ");
-  Serial.println(rssi);
-  delay(5000);
-}
+<section id="main">
+<nav>
+<a href="#" class="logo">
+<img src="image.svg" alt="The Logo of my project">
+</a>
+<span class="menu-space"></span>
+<ul class="menu">
+<li><a href="#">Home</a></li>
+<li><a href="#">Skills</a></li>
+<li><a href="#">Recent</a></li>
+<li><a href="#">Clients</a></li>
+<li><a href="#">Contacts</a></li>
+</ul>
+<a href="#" class="hey"><strong> Say Hi! </strong></a>
+</nav>
+</section>
+<section class="content">
+  <div class="image">
+    <img src="thunder.JPG" alt="this is thunder">
+  </div>
+  <div class="main-text">
+    <h1>Hello, I am  <br> Thunder</h1>
+    <p> Hey! in this video iam showing you how to create a website using html and css</p>
+    <a href="#" class="resume">See my resume</a>
+  </div>
+</section>
 </body>
 </html>
